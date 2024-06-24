@@ -30,8 +30,7 @@ CREATE TABLE IF NOT EXISTS "pendingApplications" (
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "users" (
 	"id" serial PRIMARY KEY NOT NULL,
-	"name" text NOT NULL,
-	"email" text NOT NULL
+	"name" text
 );
 --> statement-breakpoint
 DO $$ BEGIN

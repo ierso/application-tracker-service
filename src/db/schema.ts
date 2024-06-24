@@ -9,8 +9,7 @@ import {
 
 export const users = pgTable('users', {
   id: serial('id').primaryKey(),
-  name: text('name').notNull(),
-  email: text('email').notNull(),
+  name: text('name'),
 })
 
 export const applications = pgTable('applications', {

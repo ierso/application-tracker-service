@@ -2,6 +2,7 @@ import express, { Express } from 'express'
 
 import dotenv from 'dotenv'
 import { auth } from 'express-oauth2-jwt-bearer'
+import { handleUser } from './middleware/handleUser'
 import routes from './routes'
 
 dotenv.config()
@@ -10,7 +11,7 @@ dotenv.config()
 const jwtCheck = auth({
   audience: process.env.AUTH0_AUDIENCE,
   issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL,
-  tokenSigningAlg: 'RS256',
+  tokenSigningAlg: process.env.AUTH0_TOKEN_SIGNING_ALG,
 })
 
 const app: Express = express()
@@ -24,7 +25,7 @@ app.get('/api/public', (req, res) => {
   res.json({ message: 'This is a public endpoint' })
 })
 
-app.use('/api', jwtCheck, routes)
+app.use('/api', jwtCheck, handleUser, routes)
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`)
